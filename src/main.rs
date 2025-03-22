@@ -40,8 +40,6 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     // Parse Command line arguments into a base16 color scheme
     let args: Vec<String> = std::env::args().collect();
 
-    println!("number of args: {}", args.len());
-
     let mode_str = match args.get(1) {
         Some(s) => s.as_str(),
         None => {
@@ -76,9 +74,6 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
             std::process::exit(1);
         }
     };
-    println!("{:?}", theme);
-
-    // Create theme
 
     // Set base colors
     let mut builder = match is_dark {
