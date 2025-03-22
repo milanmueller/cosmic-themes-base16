@@ -35,6 +35,12 @@ checksum = "ace50bade8e6234aa140d9a2f552bbee1db4d353f69b8217bc503490fc1a9f26"
 
 [[package]]
 name = "base64"
+version = "0.21.7"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "9d297deb1925b89f2ccc13d7635fa0714f12c87adce1c75356b39ca9b7178567"
+
+[[package]]
+name = "base64"
 version = "0.22.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "72b3254f16251a8381aa12e40e3c4d2f0199f8c6508fbecb9d91f575e0fbb8c6"
@@ -178,7 +184,7 @@ dependencies = [
  "known-folders",
  "notify",
  "once_cell",
- "ron",
+ "ron 0.9.0-alpha.1",
  "serde",
  "tracing",
  "xdg",
@@ -204,7 +210,7 @@ dependencies = [
  "dirs",
  "lazy_static",
  "palette",
- "ron",
+ "ron 0.9.0-alpha.1",
  "serde",
  "serde_json",
  "thiserror",
@@ -214,7 +220,11 @@ dependencies = [
 name = "cosmic-themes-base16"
 version = "0.1.0"
 dependencies = [
+ "cosmic-config",
  "cosmic-theme",
+ "ron 0.8.1",
+ "serde",
+ "serde_yaml",
 ]
 
 [[package]]
@@ -994,11 +1004,23 @@ dependencies = [
 
 [[package]]
 name = "ron"
+version = "0.8.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "b91f7eff05f748767f183df4320a63d6936e9c6107d97c9e6bdd9784f4289c94"
+dependencies = [
+ "base64 0.21.7",
+ "bitflags 2.9.0",
+ "serde",
+ "serde_derive",
+]
+
+[[package]]
+name = "ron"
 version = "0.9.0-alpha.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "7644a2a539ff7fa991c8f4652373cd722d387e39229415103243914249730836"
 dependencies = [
- "base64",
+ "base64 0.22.1",
  "bitflags 2.9.0",
  "serde",
  "serde_derive",
@@ -1101,6 +1123,19 @@ dependencies = [
  "memchr",
  "ryu",
  "serde",
+]
+
+[[package]]
+name = "serde_yaml"
+version = "0.9.34+deprecated"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "6a8b1a1a2ebf674015cc02edccce75287f1a0130d394307b36743c2f5d504b47"
+dependencies = [
+ "indexmap",
+ "itoa",
+ "ryu",
+ "serde",
+ "unsafe-libyaml",
 ]
 
 [[package]]
@@ -1266,6 +1301,12 @@ name = "unicode-ident"
 version = "1.0.18"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "5a5f39404a5da50712a4c1eecf25e90dd62b613502b7e925fd4e4d19b5c96512"
+
+[[package]]
+name = "unsafe-libyaml"
+version = "0.2.11"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "673aac59facbab8a9007c7f6108d11f63b603f7cabff99fabf650fea5c32b861"
 
 [[package]]
 name = "walkdir"

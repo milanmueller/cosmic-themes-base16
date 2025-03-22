@@ -1,2 +1,7 @@
 /target
 .direnv/
+# Theme files for testing
+*.yaml
+*.ron
+# Result folder
+output/
