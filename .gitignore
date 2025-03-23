@@ -5,3 +5,5 @@
 *.ron
 # Result folder
 output/
+# Nix build result symlink
+result
