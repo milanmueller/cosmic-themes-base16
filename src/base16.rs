@@ -1,4 +1,4 @@
-use cosmic_theme::palette::{Srgb, Srgba, WithAlpha};
+use cosmic_theme::palette::Srgb;
 use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Serialize, Deserialize)]
@@ -31,6 +31,7 @@ struct Base16YamlScheme {
 }
 
 #[derive(Debug, Deserialize, Serialize)]
+#[allow(non_snake_case)]
 struct Base16YamlPalette {
     base00: String,
     base01: String,
@@ -42,17 +43,11 @@ struct Base16YamlPalette {
     base07: String,
     base08: String,
     base09: String,
-    #[allow(non_snake_case)]
     base0A: String,
-    #[allow(non_snake_case)]
     base0B: String,
-    #[allow(non_snake_case)]
     base0C: String,
-    #[allow(non_snake_case)]
     base0D: String,
-    #[allow(non_snake_case)]
     base0E: String,
-    #[allow(non_snake_case)]
     base0F: String,
 }
 

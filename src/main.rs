@@ -1,8 +1,7 @@
 use std::{fs, path::Path};
 
 use base16::Base16Theme;
-use cosmic_config::CosmicConfigEntry;
-use cosmic_theme::{palette::WithAlpha, Theme, ThemeBuilder};
+use cosmic_theme::{palette::WithAlpha, ThemeBuilder};
 
 mod base16;
 
