@@ -22,7 +22,13 @@
     }:
     let
       # Home Manager module that can be imported
-      homeManagerModule = { config, lib, pkgs, ... }:
+      homeManagerModule =
+        {
+          config,
+          lib,
+          pkgs,
+          ...
+        }:
         let
           module = import ./module.nix {
             inherit config lib pkgs;
@@ -34,7 +40,8 @@
       # Expose the homeManagerModule
       homeManagerModules.default = homeManagerModule;
       homeManagerModules.cosmic-themes-base16 = homeManagerModule;
-    } // (flake-utils.lib.eachDefaultSystem (
+    }
+    // (flake-utils.lib.eachDefaultSystem (
       system:
       let
         overlays = [ (import rust-overlay) ];
