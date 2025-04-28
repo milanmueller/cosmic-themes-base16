@@ -13,7 +13,7 @@ in
     theme = lib.mkOption {
       type = lib.types.submodule {
         options = {
-          mode = lib.mkOptions {
+          mode = lib.mkOption {
             type = lib.types.enum [
               "light"
               "dark"
@@ -53,23 +53,23 @@ in
 
     home.activation.generateCosmicTheme = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
       ${pkgs.cosmic-themes-base16}/bin/cosmic-themes-base16 \
-        -- mode ${cfg.theme.mode} \
-        -- base00 ${cfg.theme.base00} \
-        -- base01 ${cfg.theme.base00} \
-        -- base02 ${cfg.theme.base00} \
-        -- base03 ${cfg.theme.base00} \
-        -- base04 ${cfg.theme.base00} \
-        -- base05 ${cfg.theme.base00} \
-        -- base06 ${cfg.theme.base00} \
-        -- base07 ${cfg.theme.base00} \
-        -- base08 ${cfg.theme.base00} \
-        -- base09 ${cfg.theme.base00} \
-        -- base0a ${cfg.theme.base00} \
-        -- base0b ${cfg.theme.base00} \
-        -- base0c ${cfg.theme.base00} \
-        -- base0d ${cfg.theme.base00} \
-        -- base0e ${cfg.theme.base00} \
-        -- base0f ${cfg.theme.base00} \
+        --mode ${cfg.theme.mode} \
+        --base00 ${cfg.theme.base00} \
+        --base01 ${cfg.theme.base01} \
+        --base02 ${cfg.theme.base02} \
+        --base03 ${cfg.theme.base03} \
+        --base04 ${cfg.theme.base04} \
+        --base05 ${cfg.theme.base05} \
+        --base06 ${cfg.theme.base06} \
+        --base07 ${cfg.theme.base07} \
+        --base08 ${cfg.theme.base08} \
+        --base09 ${cfg.theme.base09} \
+        --base0A ${cfg.theme.base0A} \
+        --base0B ${cfg.theme.base0B} \
+        --base0C ${cfg.theme.base0C} \
+        --base0D ${cfg.theme.base0D} \
+        --base0E ${cfg.theme.base0E} \
+        --base0F ${cfg.theme.base0F} \
     '';
   };
 }
