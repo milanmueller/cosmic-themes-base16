@@ -11,33 +11,18 @@
     };
   };
 
-  outputs =
-    {
-      self,
-      nixpkgs,
-      flake-utils,
-      rust-overlay,
-      home-manager,
-      ...
-    }:
-    flake-utils.lib.eachDefaultSystem (
-      system:
+  outputs = { self, nixpkgs, flake-utils, rust-overlay, home-manager, ... }:
+    flake-utils.lib.eachDefaultSystem (system:
       let
         pkgs = import nixpkgs {
           inherit system;
-          overlays = [
-            (import rust-overlay)
-          ];
+          overlays = [(import rust-overlay)];
         };
         rustToolchain = pkgs.rust-bin.stable.latest.default.override {
-          extensions = [
-            "rust-src"
-            "rust-analyzer"
-          ];
+          extensions = ["rust-src" "rust-analyzer"];
         };
-      in
-      {
-        defaultPackage = pkgs.rustPlatform.buildRustPackage {
+      in {
+        packages.default = pkgs.rustPlatform.buildRustPackage {
           pname = "cosmic-themes-base16";
           version = "0.1.0";
           src = self;
@@ -46,44 +31,10 @@
             lockFile = ./Cargo.lock;
             allowBuiltinFetchGit = true;
           };
-          nativeBuildInputs = [ rustToolchain ];
+          nativeBuildInputs = [rustToolchain];
         };
       }
-    );
-  # {
-  # homeManagerModules = {
-  #   default = import ./home-manager-module;
-  # };
-  # homeModules.default = import ./home-manager-module;
-  # packages = flake-utils.lib.eachDefaultSystem (
-  #   system:
-  #   let
-  #     pkgs = import nixpkgs {
-  #       inherit system;
-  #       overlays = [
-  #         (import rust-overlay)
-  #       ];
-  #     };
-  #     rustToolchain = pkgs.rust-bin.stable.latest.default.override {
-  #       extensions = [
-  #         "rust-src"
-  #         "rust-analyzer"
-  #       ];
-  #     };
-  #   in
-  #   {
-  #     default = pkgs.rustPlatform.buildRustPackage {
-  #       pname = "cosmic-themes-base16";
-  #       version = "0.1.0";
-  #       src = self;
-  #       useFetchCargoVendor = true;
-  #       cargoLock = {
-  #         lockFile = ./Cargo.lock;
-  #         allowBuiltinFetchGit = true;
-  #       };
-  #       nativeBuildInputs = [ rustToolchain ];
-  #     };
-  #   }
-  # );
-  # };
+    ) // {
+      homeManagerModules.default = import ./home-manager-module;
+    };
 }
