@@ -7,3 +7,6 @@
 output/
 # Nix build result symlink
 result
+.aider*
+*.qcow2
+hm-test/*

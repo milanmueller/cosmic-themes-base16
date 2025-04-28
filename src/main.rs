@@ -107,7 +107,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     // builder.write_entry(&builder_config)?;
     // Create theme from builder and write it to config files
     let theme = builder.build();
-    serialize_to_folder!(theme, Path::new("output/theme"), {
+    serialize_to_folder!(theme, Path::new("/tmp/cosmic-theme-files"), {
         accent,
         accent_button,
         accent_text,
