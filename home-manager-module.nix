@@ -1,9 +1,10 @@
 {
-  config,
-  lib,
   pkgs,
+  lib,
+  config,
   ...
 }:
+
 let
   cfg = config.programs.cosmic-themes-base16;
 in
@@ -19,10 +20,7 @@ in
               "dark"
             ];
             default = "dark";
-            description = ''
-              Set the mode of the base16 theme.
-              Possible values are "light" and "dark".
-            '';
+            description = "Set the mode of the base16 theme.";
           };
           base00 = lib.mkOption { type = lib.types.str; };
           base01 = lib.mkOption { type = lib.types.str; };
@@ -42,9 +40,7 @@ in
           base0F = lib.mkOption { type = lib.types.str; };
         };
       };
-      description = ''
-        The base16 theme to use.
-      '';
+      description = "The base16 theme to use.";
     };
   };
 
@@ -69,7 +65,7 @@ in
         --base0C ${cfg.theme.base0C} \
         --base0D ${cfg.theme.base0D} \
         --base0E ${cfg.theme.base0E} \
-        --base0F ${cfg.theme.base0F} \
+        --base0F ${cfg.theme.base0F}
     '';
   };
 }

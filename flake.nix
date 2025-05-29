@@ -5,10 +5,6 @@
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     flake-utils.url = "github:numtide/flake-utils";
     rust-overlay.url = "github:oxalica/rust-overlay";
-    home-manager = {
-      url = "github:nix-community/home-manager";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
   };
 
   outputs =
@@ -17,9 +13,11 @@
       nixpkgs,
       flake-utils,
       rust-overlay,
-      home-manager,
       ...
     }:
+    let
+      appName = "cosmic-themes-base16";
+    in
     flake-utils.lib.eachDefaultSystem (
       system:
       let
@@ -27,16 +25,16 @@
           inherit system;
           overlays = [ (import rust-overlay) ];
         };
+
         rustToolchain = pkgs.rust-bin.stable.latest.default.override {
           extensions = [
             "rust-src"
             "rust-analyzer"
           ];
         };
-      in
-      {
-        packages.default = pkgs.rustPlatform.buildRustPackage {
-          pname = "cosmic-themes-base16";
+
+        appPackage = pkgs.rustPlatform.buildRustPackage {
+          pname = appName;
           version = "0.1.0";
           src = self;
           useFetchCargoVendor = true;
@@ -46,9 +44,19 @@
           };
           nativeBuildInputs = [ rustToolchain ];
         };
+      in
+      {
+        packages = {
+          default = appPackage;
+          ${appName} = appPackage;
+        };
+
+        overlays.default = final: prev: {
+          ${appName} = appPackage;
+        };
       }
     )
     // {
-      homeManagerModules.default = import ./home-manager-module;
+      homeManagerModules.default = import ./home-manager-module.nix;
     };
 }
