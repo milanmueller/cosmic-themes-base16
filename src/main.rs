@@ -43,7 +43,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
         Some(s) => s.as_str(),
         None => {
             eprintln!(
-                "Usage: {} light|dark <base00> <base01> ... <base0f> OR {} light|dark <yaml_file>",
+                "Usage: {} light|dark output_path <base00> <base01> ... <base0f> OR {} light|dark <yaml_file>",
                 args[0], args[0]
             );
             std::process::exit(1);
@@ -54,7 +54,17 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
         "dark" => true,
         _ => {
             eprintln!(
-                "Usage: {} light|dark <base00> <base01> ... <base0f> OR {} light|dark <yaml_file>",
+                "Usage: {} light|dark output_path <base00> <base01> ... <base0f> OR {} light|dark <yaml_file>",
+                args[0], args[0]
+            );
+            std::process::exit(1);
+        }
+    };
+    let output_path = match args.get(2) {
+        Some(s) => s.as_str(),
+        None => {
+            eprintln!(
+                "Usage: {} light|dark output_path <base00> <base01> ... <base0f> OR {} light|dark <yaml_file>",
                 args[0], args[0]
             );
             std::process::exit(1);
@@ -63,11 +73,11 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
 
     // Either parse 16 given color codes, or one given yaml file
     let theme = match args.len() {
-        18 => Base16Theme::from_args(&args[2..])?,
-        3 => Base16Theme::from_yaml_file(&args[2])?,
+        19 => Base16Theme::from_args(&args[3..])?,
+        4 => Base16Theme::from_yaml_file(&args[3])?,
         _ => {
             eprintln!(
-                "Usage: {} light|dark <base00> <base01> ... <base0f> OR {} light|dark <yaml_file>",
+                "Usage: {} light|dark output_path <base00> <base01> ... <base0f> OR {} light|dark <yaml_file>",
                 args[0], args[0]
             );
             std::process::exit(1);
@@ -107,7 +117,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     // builder.write_entry(&builder_config)?;
     // Create theme from builder and write it to config files
     let theme = builder.build();
-    serialize_to_folder!(theme, Path::new("/tmp/cosmic-theme-files"), {
+    serialize_to_folder!(theme, Path::new(output_path), {
         accent,
         accent_button,
         accent_text,
